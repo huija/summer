@@ -1,0 +1,37 @@
+srv:
+  name: summer
+  tag: v0.0.1
+  host: localhost
+  author: huija
+  listen: 0.0.0.0
+  port: 9090
+  cors: true
+  trace: true
+  pprof: true
+  # static: ./static
+  # htmlglob: ./static/html/*
+logs:
+  - level: -1
+    type: file
+    file:
+      path: ./conf/test.log
+      maxsize: 1
+      maxbackups: 3
+      maxage: 30
+      compress: false
+      localzone: true
+  - level: -1
+    type: console
+dbs:
+  mysql:
+    schema: root:123456@tcp(127.0.0.1:3306)/summer?charset=utf8mb4&parseTime=True&loc=Local
+    maxpoolsize: 100
+    minpoolsize: 10
+  mongo:
+    schema: mongodb://127.0.0.1:27017/summer
+    maxpoolsize: 100
+    minpoolsize: 10
+  redis:
+    addrs: [127.0.0.1:6379]
+    maxpoolsize: 100
+    minpoolsize: 10
