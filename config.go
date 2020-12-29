@@ -3,6 +3,7 @@ package summer
 import (
 	"flag"
 	"github.com/huija/summer/conf"
+	"github.com/huija/summer/dbs"
 	"github.com/huija/summer/logs"
 	"github.com/huija/summer/srv"
 	"gopkg.in/yaml.v3"
@@ -47,6 +48,12 @@ func yamlConfigDefaults() (err error) {
 
 	// srv
 	conf.Config.Srv, err = srv.Defaults(conf.Config.Srv)
+	if err != nil {
+		return
+	}
+
+	// dbs
+	conf.Config.DBs, err = dbs.Defaults(conf.Config.DBs)
 	if err != nil {
 		return
 	}
