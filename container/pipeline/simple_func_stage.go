@@ -2,6 +2,7 @@ package pipeline
 
 import (
 	"container/heap"
+	"math"
 	"strings"
 )
 
@@ -214,11 +215,11 @@ func (s *SimpleFuncStage) String() string {
 	p := s.name
 
 	spi := " & "
-	pipes := make([]string, 2*(Runner+1))
+	pipes := make([]string, 2*(math.MaxInt8+1))
 	for _, stage := range s.stages {
 		c := stage.String()
 		if c != "" {
-			pipes[uint8(stage.priority+Runner)+1] += c + spi
+			pipes[uint8(stage.priority)+math.MaxInt8+1] += c + spi
 		}
 	}
 
