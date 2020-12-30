@@ -32,7 +32,7 @@ func TestObjectID_Hex(t *testing.T) {
 func TestObjectID_Timestamp(t *testing.T) {
 	now := time.Now()
 	id := NewObjectIDFromTimestamp(now)
-	assert.Equal(t, now, id.Timestamp())
+	assert.Equal(t, now.Unix(), id.Timestamp().Unix())
 }
 
 func BenchmarkObjectID_Hex(b *testing.B) {
