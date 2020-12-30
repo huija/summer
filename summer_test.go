@@ -8,6 +8,7 @@ import (
 	"github.com/huija/summer/container/pipeline"
 	"github.com/huija/summer/logs"
 	"github.com/huija/summer/srv"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"net/http"
@@ -44,10 +45,10 @@ func srvPing(t *testing.T) {
 	time.Sleep(1 * time.Second) // wait server start
 	r, err := http.Get("http://localhost:9090/ping")
 	require.Equal(t, nil, err)
-	require.Equal(t, http.StatusOK, r.StatusCode)
+	assert.Equal(t, http.StatusOK, r.StatusCode)
 	body, err := ioutil.ReadAll(r.Body)
 	require.Equal(t, nil, err)
-	require.Equal(t, `{"ping":"pong"}`, string(body))
+	assert.Equal(t, `{"ping":"pong"}`, string(body))
 }
 
 func TestMain(m *testing.M) {

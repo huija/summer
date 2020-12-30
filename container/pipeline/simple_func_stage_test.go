@@ -3,6 +3,7 @@ package pipeline
 import (
 	"errors"
 	"github.com/huija/summer/logs"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"os"
 	"testing"
@@ -100,10 +101,10 @@ func TestSimpleFuncStage_Exec(t *testing.T) {
 }
 
 func TestClosePipeLevel(t *testing.T) {
-	require.Equal(t, ClosePipeLevel(Initiator), Runner)
-	require.Equal(t, ClosePipeLevel(Initiator+1), Runner)
-	require.Equal(t, ClosePipeLevel(Runner), Initiator+1)
-	require.Equal(t, ClosePipeLevel(Debugger), Debugger)
+	assert.Equal(t, ClosePipeLevel(Initiator), Runner)
+	assert.Equal(t, ClosePipeLevel(Initiator+1), Runner)
+	assert.Equal(t, ClosePipeLevel(Runner), Initiator+1)
+	assert.Equal(t, ClosePipeLevel(Debugger), Debugger)
 }
 
 func TestMain(m *testing.M) {

@@ -1,6 +1,7 @@
 package dbs
 
 import (
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
 )
@@ -22,5 +23,5 @@ func TestDefaults(t *testing.T) {
 	)
 	dbs, err = Defaults(dbs)
 	require.Equal(t, nil, err)
-	require.Equal(t, defaults, dbs)
+	assert.Equal(t, defaults, dbs)
 }
