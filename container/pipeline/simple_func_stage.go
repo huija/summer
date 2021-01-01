@@ -11,10 +11,11 @@ type SimpleFunc func() error
 
 // SimpleFuncStage simple func stage
 type SimpleFuncStage struct {
-	fn       SimpleFunc
-	priority PipeLevel
-	stages   []*SimpleFuncStage          // children
-	stageMap map[string]*SimpleFuncStage // can reach stage after pop
+	fn         SimpleFunc
+	priority   PipeLevel
+	stages     []*SimpleFuncStage          // children
+	stageMap   map[string]*SimpleFuncStage // can reach stage after pop
+	defaultPPL PipeLevel                   // default parent pipe level
 	// should not changed after init
 	name  string
 	split string
@@ -40,6 +41,12 @@ func (s *SimpleFuncStage) SetFunc(f SimpleFunc) *SimpleFuncStage {
 // SetPriority set priority
 func (s *SimpleFuncStage) SetPriority(p PipeLevel) *SimpleFuncStage {
 	s.priority = p
+	return s
+}
+
+// SetDefaultPPL set default priority for parent(auto added)
+func (s *SimpleFuncStage) SetDefaultPPL(p PipeLevel) *SimpleFuncStage {
+	s.defaultPPL = p
 	return s
 }
 
@@ -81,7 +88,6 @@ func (s *SimpleFuncStage) AddStage(parent string, name string, stage PipeLine) P
 		}
 
 		// 2.2 origin v should be a children of parent(new one)
-		// FIXME a
 		if strings.HasPrefix(v.name, parent+s.split) {
 			origin := *v
 
@@ -95,9 +101,9 @@ func (s *SimpleFuncStage) AddStage(parent string, name string, stage PipeLine) P
 
 			if v.AddStage(parent, origin.name, &origin) == nil {
 				// rollback
-				v.name = origin.name
-				v.fn = origin.fn
-				v.stages = origin.stages
+				v = &origin
+				delete(s.stageMap, parent)
+				s.stageMap[origin.name] = v
 				return nil
 			}
 
@@ -111,8 +117,9 @@ func (s *SimpleFuncStage) AddStage(parent string, name string, stage PipeLine) P
 	}
 
 	// 3. no parent before
-	// FIXME this path is very dangerous because of parent's default PipeLevel
-	p := NewSimpleFuncStage(parent, s.split)
+	// this path is very dangerous because of parent's default PipeLevel
+	// It is necessary to confirm parent's pipeLevel by set child's defaultPPL
+	p := NewSimpleFuncStage(parent, s.split).SetPriority(s.defaultPPL)
 	heap.Push(s, p)
 	s.stageMap[parent] = p
 	return p.AddStage(parent, name, stage)
