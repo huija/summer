@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"log"
 	"net"
 )
 
@@ -9,7 +8,7 @@ import (
 func GetOutboundIP() string {
 	conn, err := net.Dial("udp", "8.8.8.8:80")
 	if err != nil {
-		log.Println(err)
+		return "127.0.0.1"
 	}
 	defer conn.Close()
 

@@ -26,13 +26,13 @@ type Srv struct {
 	Author    string `json:",omitempty"`
 	Host      string `json:",omitempty"`
 	IP        string `json:",omitempty"`
-	Release   bool   `json:"release"`
 	FrameWork string `json:",omitempty"`
 	Listen    string `json:",omitempty"`
 	Port      string `json:",omitempty"`
 	BaseURL   string `json:",omitempty"`
 
 	// zero val is ok
+	Release  bool
 	Trace    bool
 	Pprof    bool
 	Cors     bool

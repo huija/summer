@@ -25,12 +25,12 @@ type PipeLevel int8
 // lower will run before than higher
 // you can customize your own priority
 const (
-	Debugger = iota // default 0:debug wrap
-	Enhancer        // enhancer feature
-	Feature         // user feature
+	Debugger PipeLevel = iota // default 0:debug wrap
+	Enhancer                  // enhancer feature
+	Feature                   // user feature
 
-	Initiator = math.MinInt8 // run first,default priority
-	Runner    = math.MaxInt8 // final runner
+	Initiator PipeLevel = math.MinInt8 // run first,default priority
+	Runner    PipeLevel = math.MaxInt8 // final runner
 )
 
 // ClosePipeLevel by original pipeLevel
