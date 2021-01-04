@@ -29,7 +29,7 @@ const (
 	Enhancer                  // enhancer feature
 	Feature                   // user feature
 
-	Initiator PipeLevel = math.MinInt8 // run first,default priority
+	Initiator PipeLevel = math.MinInt8 // run first
 	Runner    PipeLevel = math.MaxInt8 // final runner
 )
 

@@ -36,6 +36,7 @@ type Srv struct {
 	Trace    bool
 	Pprof    bool
 	Cors     bool
+	Swag     bool
 	Static   string
 	HtmlGlob string
 }

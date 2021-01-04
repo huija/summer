@@ -8,6 +8,7 @@ require (
 	github.com/go-redis/redis/v8 v8.4.0
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/stretchr/testify v1.6.1
+	github.com/swaggo/gin-swagger v1.3.0
 	go.mongodb.org/mongo-driver v1.4.4
 	go.uber.org/zap v1.16.0
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0

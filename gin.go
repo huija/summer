@@ -11,6 +11,8 @@ import (
 	"github.com/huija/summer/logs"
 	"github.com/huija/summer/srv"
 	"github.com/huija/summer/utils"
+	"github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 	"net/http"
 	"net/http/pprof"
 	"time"
@@ -24,6 +26,7 @@ const (
 	GinTrace = Gin + Split + "trace"
 	GinPprof = Gin + Split + "pprof"
 	GinCors  = Gin + Split + "cors"
+	GinSwag  = Gin + Split + "swag"
 )
 
 func ginEngine() (err error) {
@@ -71,15 +74,21 @@ func ginSetup() (err error) {
 		}
 	}
 
+	if conf.Config.Srv.Pprof {
+		if AddStage(GinPprof, ginPProf, pipeline.Enhancer) == nil {
+			return errors.New("pipe: add " + GinPprof + " stage failed")
+		}
+	}
+
 	if conf.Config.Srv.Cors {
 		if AddStage(GinCors, ginCors, pipeline.Enhancer) == nil {
 			return errors.New("pipe: add " + GinCors + " stage failed")
 		}
 	}
 
-	if conf.Config.Srv.Pprof {
-		if AddStage(GinPprof, ginPProf, pipeline.Enhancer) == nil {
-			return errors.New("pipe: add " + GinPprof + " stage failed")
+	if conf.Config.Srv.Swag {
+		if AddStage(GinSwag, ginSwag, pipeline.Enhancer) == nil {
+			return errors.New("pipe: add " + GinSwag + " stage failed")
 		}
 	}
 
@@ -190,5 +199,14 @@ func ginPProf() (err error) {
 	pp.GET("/threadcreate", pprofHandler(pprof.Handler("threadcreate").ServeHTTP))
 
 	logs.SugaredLogger.Debug("gin pprof router init successfully!")
+	return
+}
+
+// https://swaggo.github.io/swaggo.io/declarative_comments_format/
+func ginSwag() (err error) {
+	url := ginSwagger.URL(fmt.Sprintf("http://%s/swagger/doc.json", fmt.Sprintf("%s:%s", conf.Config.Srv.Host, conf.Config.Srv.Port)))
+	GinSrv.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
+
+	logs.SugaredLogger.Info("gin swagger router init successfully!")
 	return
 }
