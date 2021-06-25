@@ -1,6 +1,6 @@
 [toc]
 
-![](https://github.com/huija/summer/summer.png)
+![](https://huija.github.io/images/summer.png)
 
 # summer
 ![GitHub](https://img.shields.io/github/license/huija/summer)
