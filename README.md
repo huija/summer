@@ -1,6 +1,9 @@
 [toc]
 
+![](https://github.com/huija/summer/summer.png)
+
 # summer
+![GitHub](https://img.shields.io/github/license/huija/summer)
 
 Blooming like summer flowers
 > config your own web server
@@ -10,6 +13,7 @@ Blooming like summer flowers
 - mysql: github.com/go-sql-driver/mysql
 - redis: github.com/go-redis/redis
 - mongo: go.mongodb.org/mongo-driver/mongo
+
 > 后续也可以集成其余框架的一些轮子, 通过配置项直接选择
 
 ## create a basic repo
