@@ -1,9 +1,8 @@
-[toc]
-
 <div align=center><img width="800" height=480" src="https://huija.github.io/images/summer.png"/></div>
 
 # summer
 ![GitHub](https://img.shields.io/github/license/huija/summer)
+![Build](https://www.travis-ci.com/huija/summer.svg?branch=main)
 
 Blooming like summer flowers
 > config your own web server
