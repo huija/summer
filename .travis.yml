@@ -4,6 +4,9 @@ go:
   - 1.15.x
   - tip
 
+git:
+  depth: 1
+
 branches:
   only:
     - main
