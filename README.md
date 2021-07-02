@@ -3,6 +3,7 @@
 # summer
 ![GitHub](https://img.shields.io/github/license/huija/summer)
 ![Build](https://www.travis-ci.com/huija/summer.svg?branch=main)
+![codecov](https://codecov.io/gh/huija/summer/branch/main/graph/badge.svg?token=uxnCrKFBKn)
 
 Blooming like summer flowers
 > config your own web server

@@ -27,6 +27,12 @@ func TestObjectID_Hex(t *testing.T) {
 	err = json.Unmarshal(marshal, &nid)
 	require.Equal(t, nil, err)
 	assert.Equal(t, id, nid)
+
+	marshal2, err := json.Marshal(map[string]interface{}{"$oid": id})
+	require.Equal(t, nil, err)
+	err = json.Unmarshal(marshal2, &nid)
+	require.Equal(t, nil, err)
+	assert.Equal(t, id, nid)
 }
 
 func TestObjectID_Timestamp(t *testing.T) {
