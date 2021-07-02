@@ -1,6 +1,6 @@
 [toc]
 
-![](https://huija.github.io/images/summer.png)
+<div align=center><img width="800" height=480" src="https://huija.github.io/images/summer.png"/></div>
 
 # summer
 ![GitHub](https://img.shields.io/github/license/huija/summer)
@@ -184,7 +184,7 @@ dbs:
     schema: mongodb://127.0.0.1:27017/repo
     maxpoolsize: 100
     minpoolsize: 10
-``` 
+```
 调用方式
 ```go
 	summer.GinSrv.GET("/mongo/ping", func(c *gin.Context) {
