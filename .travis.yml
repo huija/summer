@@ -4,6 +4,13 @@ go:
   - 1.15.x
   - tip
 
+git:
+  depth: 1
+
+branches:
+  only:
+    - main
+
 before_install:
   - go get -t -v ./...
   - chmod +x ./test.sh
